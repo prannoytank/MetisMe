@@ -5,11 +5,61 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
+    <welcome-file>Index.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet-mapping>
+    <servlet-name>UserRegistrationServlet</servlet-name>
+    <url-pattern>/UserRegistrationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserRegistrationServlet</display-name>
+    <servlet-name>UserRegistrationServlet</servlet-name>
+    <servlet-class>com.metisme.controller.UserRegistrationServlet</servlet-class>
+  </servlet>
+  
+  
+  <servlet-mapping>
+    <servlet-name>UserDataForHomePage</servlet-name>
+    <url-pattern>/UserDataForHomePage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserDataForHomePage</display-name>
+    <servlet-name>UserDataForHomePage</servlet-name>
+    <servlet-class>com.metisme.controller.UserDataForHomePage</servlet-class>
+  </servlet>
+  
+   <servlet-mapping>
+    <servlet-name>FileUploadServlet</servlet-name>
+    <url-pattern>/FileUploadServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FileUploadServlet</display-name>
+    <servlet-name>FileUploadServlet</servlet-name>
+    <servlet-class>com.metisme.controller.FileUploadServlet</servlet-class>
+  </servlet>
+  
+  
+  
+  
+  
+   <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>logout</display-name>
+    <servlet-name>logout</servlet-name>
+    <servlet-class>com.metisme.controller.logout</servlet-class>
+  </servlet>
+  
+  
+   <servlet-mapping>
     <servlet-name>UpdateMessageServlet</servlet-name>
     <url-pattern>/UpdateMessageServlet</url-pattern>
   </servlet-mapping>
@@ -18,5 +68,23 @@
     <display-name>UpdateMessageServlet</display-name>
     <servlet-name>UpdateMessageServlet</servlet-name>
     <servlet-class>com.metisme.controller.UpdateMessageServlet</servlet-class>
+  </servlet>
+  
+  
+  
+  
+  
+  
+  
+  
+  <servlet-mapping>
+    <servlet-name>FollowPeopleServlet</servlet-name>
+    <url-pattern>/FollowPeopleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FollowPeopleServlet</display-name>
+    <servlet-name>FollowPeopleServlet</servlet-name>
+    <servlet-class>com.metisme.controller.FollowPeopleServlet</servlet-class>
   </servlet>
 </web-app>

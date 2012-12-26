@@ -17,7 +17,7 @@ public class DBConnection {
 			try {
 
 				Class.forName("com.mysql.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/metisme", "root", "bhuv");
+				con = DriverManager.getConnection("jdbc:mysql://localhost:3307/prannoy23?autoReconnect=true","prannoy23","dante0265");
 				con.setAutoCommit(false);
 			} catch (ClassNotFoundException ex) {
 				System.out.println("Class not found in DBConnection:-"

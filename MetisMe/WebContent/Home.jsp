@@ -10,6 +10,17 @@
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 <title>Home</title>
 <style type="text/css">
+
+.com_icon
+{
+float: left;
+
+}
+#post_body
+{
+background-color:aqua; 
+
+}
 [class^="post-"]
  {
   font-family: Arial;
@@ -40,6 +51,41 @@
 .post-body {
   padding-top: 20px;
 }
+.post-card1
+ {
+  display: block;
+  margin: 20px auto;
+  width: 300px;
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.5);
+  background: #F7F7F7;
+}
+
+.post-user1
+ {
+  float: left;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.post-date1 {
+  float: right;
+  color: grey;
+}
+
+.post-body1 {
+  padding-top: 20px;
+}
+
+
+
+
+
+
+
+
+
 textarea
  {
 resize: none;
@@ -57,11 +103,18 @@ resize: none;
 
 
 }
+
+
+
+#YourPost
+{
+overflow-y: auto;
+
+}
 #follow
 {
 overflow-y: auto; 
-height:600px;
-
+height:300px;
 }
 
 #picture
@@ -133,7 +186,7 @@ color:white;
 }
 .span2
 {
-background-color: aqua;
+background-color:silver;
 border: thin;
 border-color: black;
 -moz-border-radius: 10px;
@@ -166,9 +219,10 @@ text-align:right;
     <a class="btn btn-primary btn-medium dropdown-toggle" data-toggle="dropdown" href="#"> <span class="caret"></span></a>
     <ul class="dropdown-menu">
     <li><a href="UserDataForHomePage"><i class="icon-home"></i>Home</a></li>
-    <li><a href="#picture" data-toggle="modal" role="button" data-target="#picture"><i class="icon-picture"></i>Change Profile Picture</a></li>
+   <!--  <li><a href="#picture" data-toggle="modal" role="button" data-target="#picture"><i class="icon-picture"></i>Change Profile Picture</a></li> -->
     <li><a href="#"><i class="icon-hand-right"></i> Follower:${follower}</a></li>
     <li><a href="#"><i class="icon-hand-right"></i> Following:${following}</a></li>
+    <li><a href="#"><i class="icon-envelope"></i> No of posts:${tweets}</a></li>
     
     <li><a href="logout" class="" id="logout"><i class="icon-off"></i>Sign out</a>
     </ul>
@@ -186,7 +240,7 @@ text-align:right;
 <br>
 <div class="mainbody">
 <div align="center">
-<img src="ProfileImages/${image_path}" class="img-rounded" height="140" width="140">
+<img src="ProfileImages/DefaultPic.jpg" class="img-rounded" height="140" width="140">
 
 </div>
     <div class="container-fluid">
@@ -195,47 +249,23 @@ text-align:right;
     </div>
     <div class="row-fluid">
     <div class="span2" align="left" >
-    <div align="left">
     
-    <dl class="dl-horizontal">
-    <dt>Follower:</dt>
-    <dd>${follower}</dd>
-    <dt>Following:</dt>
-    <dd>${following}</dd>
-    </dl>
-</div>
 
     
-<div id="modelbtn" class="updatebtn">      
+<div id="modelbtn" class="updatebtn">  
+    
 <a href="#myModal" role="button"  class="btn btn-link"  data-toggle="modal"><i class="icon-hand-right"></i> Create Message</a><br>
-<a href="#follow" role="button"  class="btn btn-link"  data-toggle="modal"><i class="icon-hand-right"></i>Your Friend Follow</a><br>
-<form id="fpeople" method="post" action="FollowPeopleServlet">
-<button name="FollowPeople" class="btn btn-link"><i class="icon-hand-right"></i> Follow people</button>
-<input type="hidden" value="${userid}" name="userid">
- </form>
+<a href="#follow" role="button"  class="btn btn-link"  data-toggle="modal"><i class="icon-hand-right"></i> Follow People</a><br>
+<a href="#YouFollow" role="button"  class="btn btn-link"  data-toggle="modal"><i class="icon-hand-right"></i> You Follow</a><br>
+<a href="#YourPost" role="button"  class="btn btn-link"  data-toggle="modal"><i class="icon-hand-right"></i> Your Posts</a><br>
+
  </div>
  
 
 
 
 
-<!-- Message Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-<h3 id="myModalLabel">Create Message</h3>
-</div>
-<form id="form1" method="post" action="UpdateMessageServlet">
-<div class="modal-body">
-<textarea rows="5" cols="20" name="status"></textarea>
-</div>
-<div class="modal-footer">
 
-<input type="hidden" value="${userid}" name="user_id">
-<button class="btn btn-primary" id="savebtn">Post</button>
-</div>
-</form>
-</div>
  </div>
     
 
@@ -251,6 +281,7 @@ text-align:right;
 <div class="post-card" >
   <div class="post-title">
     <span class="post-user">${msg.getUsername()}</span>
+    <span class="com_icon"><i class="icon-comment"></i></span>
     <span class="post-date"> ${msg.getTime()}</span>
   </div>
   <br>
@@ -269,17 +300,60 @@ text-align:right;
 <script src="js/bootstrap-datepicker.js"></script>   
 <script src="js/jquery.validate.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+$('#myModal').ready(function ()
+		{
+			 $('#savebtn').click(function()
+			{
+			 var len=$('.word_count1').val().length();
+			if(len==0)
+			{
+			   alert('Please enter some text');
+			   return false;
+			}
+			else
+				return false;
+			 });
+			});
+$(document).ready(function(){
+//var total=140;
+	/**
+	 * Character Counter for inputs and text areas
+	 */
+	
+	$('.word_count1').each(function()
+		{
+		var length=140;
+		$(this).parent().find('.counter').html( length + ' characters');
+		$(this).keyup(function()
+		{
+			var new_length = length-$(this).val().length;
+			$(this).parent().find('.counter').html( new_length + ' characters');
+		});
+	});
 
+	});
+	
+	
 
 	
 $('#savebtn').click(function(){
 	$('#form1').validate();
 	
 });	
+
 $("#modelbtn").on("click", function(e) {
 	e.preventDefault();
 	$("#follow").dialog('show');
 	});
+$("#modelbtn").on("click", function(e) {
+	e.preventDefault();
+	$("#YouFollow").dialog('show');
+	});
+$("#modelbtn").on("click", function(e) {
+	e.preventDefault();
+	$("#YourPost").dialog('show');
+	});	
+	
 
 
 
@@ -302,45 +376,115 @@ if(log==true)
 </script>
 </body>
 <!--Pic modal -->
-<div id="picture" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+<!-- <div id="picture" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
 <h3 id="myModalLabel1">Upload Profile pic</h3>
 </div>
 <form id="form_pic" method="post" action="FileUploadServlet" enctype="multipart/form-data">
 <div class="modal-body">
-<input type="file" name="file"/>
+<input type="file" name="file" id="file"/>
 </div>
 <div class="modal-footer">
 <button class="btn btn-primary" id="upload">Upload</button>
 </div>
 </form>
-</div>
+</div> -->
     
 <!--Friend follow modal-->
 <div id="follow" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-<h3 id="myModalLabel2">Your Friend Follow</h3>
+<h3 id="myModalLabel2">People You May know</h3>
 </div>
 <div class="Body2">
 <c:forEach items="${people_list}" var="follow_list">
-<ul type="none"><li type="none">
 <form id="follow_people" method="post" action="FollowPeopleServlet">
-<div class="modal-body">
-<img src="ProfileImages/${follow_list.getPath()}" height="50" width="50"  class="img-rounded"><br>
-${follow_list.getUsername()}<br>
-${follow_list.getEmail()}<br>
-<input type="hidden" value="${follow_list.getUserid()}" name="follow_id">
+<div class="modal-body" id="follow_body">
+<div class="post-card1" >
+<div class="post-title1">
+    <span class="post-user1"><img src="ProfileImages/DefaultPic.jpg" height="50" width="50"  class="img-rounded"></span>
+    <span class="post-date1">${follow_list.getEmail()}</span>
+</div>
+<br>
+<div class="post-body1">
+<br><span>${follow_list.getUsername()}</span>
+<p align="center"><input type="hidden" value="${follow_list.getUserid()}" name="follow_id">
 <input type="hidden" value="${userid}" name="person_id">
-<button class="btn btn-primary" name="req_type" id="follow_too" value="Follow_mutual" >Follow</button>
+<button class="btn btn-primary" name="req_type" id="follow_too" value="Follow_mutual" >Follow</button></p>
+</div>
+</div>
 </div>
 </form>
+</c:forEach>
+</div>
+</div>
+
+<!-- people that you follow modal -->
+<div id="YouFollow" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+<h3 id="myModalLabel3">You Follow</h3>
+</div>
+<div class="Body2">
+<c:forEach items="${UfollowList}" var="follow_list1">
+<ul type="none"><li type="none">
+<div class="modal-body">
+<img src="ProfileImages/DefaultPic.jpg" height="50" width="50"  class="img-rounded"><br>
+${follow_list1.getUser_name()}<br>
+${follow_list1.getEmail_address()}<br>
+</div>
 </li>
 </ul>
 </c:forEach>
 </div>
 </div>
+
+<!-- Message Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+<h3 id="myModalLabel">Create Message</h3>
+</div>
+<form id="form1" method="post" action="UpdateMessageServlet">
+<div class="modal-body">
+<textarea class="word_count1"rows="5" cols="20" name="status" maxlength="140"></textarea><br>
+<span class="counter"></span>
+</div>
+<div class="modal-footer">
+<input type="hidden" value="${userid}" name="user_id">
+<span class="msg"></span>
+<button class="btn btn-primary" id="savebtn">Post</button>
+</div>
+</form>
+</div>
+
+<!--Your posts modal -->
+<div id="YourPost" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+<h3 id="myModalLabel4">Your Posts</h3>
+</div>
+<div class="Body2">
+<c:forEach items="${posts}" var="post">
+<div class="modal-body" id="post_body">
+<div class="post-card1" >
+  <div class="post-title1">
+    <span class="post-user1">${post.getDate()}</span>
+    <span class="post-date1"> ${post.getTime()}</span>
+  </div>
+  <br>
+  
+  <div class="post-body1">
+    <p>${post.getMessage()}</p>
+  </div>
+</div>
+</div>
+
+</c:forEach>
+</div>
+</div>
+
 
 
 

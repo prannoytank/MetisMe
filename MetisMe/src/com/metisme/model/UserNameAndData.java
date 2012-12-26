@@ -21,36 +21,7 @@ import com.metisme.bean.MessageDetailsBean;
 public class UserNameAndData 
 {
 Connection con=DBConnection.getConnection();
-public static String getFilename(Part part,String path) 
-{
-    
-        for (String cd : part.getHeader("content-disposition").split(";")) 
-        {
-        if (cd.trim().startsWith("filename")) 
-            {
-            String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-            return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
-        }
-    }
-    return null;
-}
 
-public static boolean uploadImage(String path,Part filePart,String filename) throws IOException
-{
-    
-InputStream filecontent = filePart.getInputStream();
-    OutputStream out = new FileOutputStream(new File(path+"//ProfileImages"+filename));
-int read = 0;
-byte[] bytes = new byte[1024];	 
-while ((read = filecontent.read(bytes)) != -1) 
-    {
-        out.write(bytes, 0, read);
-}	 
-filecontent.close();
-out.flush();
-out.close();
-    return true;
-}
 
 	public String username(String email)
 	{

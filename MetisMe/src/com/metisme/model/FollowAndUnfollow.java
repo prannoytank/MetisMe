@@ -62,6 +62,41 @@ public class FollowAndUnfollow
 		
 		return u1;
 	}
+	
+	public List<FriendFollowBean> youFollowList(int id) 
+	{
+		List<FriendFollowBean> fl=new ArrayList<FriendFollowBean>();
+		FriendFollowBean ffb2=null;
+		PreparedStatement st;
+		try {
+			st = con.prepareStatement("SELECT user_id,name,email,profile_image from user_master where user_id IN (Select u_id from follower_detail where f_id=?)");
+			st.setInt(1,id);
+			ResultSet rs2=st.executeQuery();
+			while(rs2.next())
+			{
+				ffb2=new FriendFollowBean ();
+				ffb2.setUserId(rs2.getInt("user_id"));
+				ffb2.setUser_name(rs2.getString("name"));
+				ffb2.setEmail_address(rs2.getString("email"));
+				ffb2.setPath(rs2.getString("profile_image"));
+				fl.add(ffb2);
+				
+				
+			}
+			
+			return fl;
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		   return fl=null;
+		}
+		//return fl;
+		
+		
+	}
+	
+	
 	public boolean FollowFriendPeople(int f_id,int u_id) throws SQLException
 	{
 		PreparedStatement pst=con.prepareStatement("insert into follower_detail(f_id,u_id)values(?,?)");

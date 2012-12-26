@@ -128,13 +128,12 @@ $(function()
           <li class="divider-vertical"></li>
           <li class="dropdown">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
-            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;" id="menu">
               <!-- Login form here -->
               <form id="frm2" action="UserRegistrationServlet" method="post" accept-charset="UTF-8">
-  <input id="user_username" style="margin-bottom: 15px;" type="text" name="email_id" size="30" placeholder="Email"/>
-  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user_password" size="30" placeholder="Password"/>
-  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
-   Remember me
+  <input id="user_username" style="margin-bottom: 15px;" type="text" name="email_id" size="30" placeholder="Email" minlength="4" maxlength="20"/>
+  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user_password" size="30" placeholder="Password" minlength="4" maxlength="20"/>
+  
  
   <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" id="login" type="submit" name="login" value="Login" />
 </form>     
@@ -170,7 +169,7 @@ $(function()
     <div class="control-group">
     <label class="control-label" for="inputEmail">Name</label>
     <div class="controls">
-    <input type="text" id="inputname" name="username" required="required" placeholder="Name"/>
+    <input type="text" id="inputname" name="username" required="required" placeholder="Name" maxlength="20"/>
     </div>
     </div>
     <div class="control-group">
@@ -178,14 +177,14 @@ $(function()
 	<div class="controls">
 	<div class="input-prepend">
 	<span class="add-on"><i class="icon-envelope"></i></span>
-	<input class="span2" id="inputIcon" type="text" name="email" placeholder="Email address" required="required">
+	<input class="span2" id="inputIcon" type="text" name="email" placeholder="Email address" required="required" minlength="3" maxlength="30">
 	</div>
 	</div>
 	</div>
     <div class="control-group">
     <label class="control-label" for="inputPassword">Password</label>
     <div class="controls">
-    <input type="password" id="inputPassword" name="password" required="required" placeholder="Password"/>
+    <input type="password" id="inputPassword" name="password" required="required" placeholder="Password" minlength="4" maxlength="20"/>
     </div>
     </div>
     
@@ -223,6 +222,18 @@ $(document).ready(function()
 		{
 			$("#time").datepicker();
 			$("#result").fadeOut(4000);
+			
+			$('#menu').ready(function(){
+				
+				$('#login').click(function()
+				{
+			$('frm2').validate();
+				});
+				
+				
+			});
+			
+			
 		});
 $('#submit').click(function(){
 	$('#regform').validate();

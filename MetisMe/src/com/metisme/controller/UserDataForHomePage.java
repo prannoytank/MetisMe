@@ -17,6 +17,7 @@ import com.metisme.bean.MessageDetailsBean;
 import com.metisme.bean.userdata;
 import com.metisme.model.FollowAndUnfollow;
 import com.metisme.model.FollowingManager;
+import com.metisme.model.Messages;
 import com.metisme.model.UserNameAndData;
 
 
@@ -58,22 +59,33 @@ public class UserDataForHomePage extends HttpServlet {
 		int follower=fm.countFollowers(id);
 		int following=fm.countFollowing(id);
 		List<MessageDetailsBean> list=und.getMessage(id);
+		
 		String path=und.getProfileImage(id);
 		//System.out.print("path"+path);
-		
+		Messages m=new Messages();
 		//List<FriendFollowBean > friend_follow_list=fnu.getYourFriendsFollowPeopleData(id);
+		List<MessageDetailsBean> posts=m.yourPost(id);
 		List<userdata> unknow_people=fnu.getUnknowPeopleData(id);
+		List<FriendFollowBean> friend_u_follow=fnu.youFollowList(id);
+		int msg_count=m.countTweets(id);
+		
+		
+		
+		
+		request.setAttribute("posts",posts);
+		request.setAttribute("tweets",msg_count);
+		request.setAttribute("UfollowList",friend_u_follow);
 		request.setAttribute("people_list",unknow_people);
+      
 
-
-int count=list.size();
+//int count=list.size();
 
 //request.setAttribute("friend_follow_list",friend_follow_list);
 request.setAttribute("image_path",path);
 request.setAttribute("userid",id);
 request.setAttribute("follower", follower);
 request.setAttribute("following", following);
-request.setAttribute("list_size",count);
+//request.setAttribute("list_size",count);
 request.setAttribute("messages",list);
 request.setAttribute("username",username);
 

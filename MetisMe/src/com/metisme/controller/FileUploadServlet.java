@@ -74,20 +74,26 @@ public class FileUploadServlet extends HttpServlet {
 	                    FileItem item = (FileItem) iterator.next();
 	 
 	                    if (!item.isFormField()) {
-	                        String fileName = item.getName();
+	                        //String fileName = item.getName();
 	 
-	                        String relativeWebPath = "workspace/MetisMe/WebContent/ProfileImages";
+	                        //String relativeWebPath = "workspace/MetisMe/WebContent/ProfileImages";
 	                        //String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
 	                        String absoluteDiskPath="C:/Users/Ashirwad Tank/Desktop/MetisMe/WebContent/ProfileImages/";
 	                        String filename = FilenameUtils.getName(item.getName());
-	                        File file = new File(absoluteDiskPath, filename);
+	                        File file = new File(absoluteDiskPath,filename);
+	                        
+	                        
+	            			
+	            			
+	                        //File f=new File(filename, filename);
 	                        //File path = new File(root + "/ProfileImages");
 	                       // System.out.print("root"+file);
 	                       
-	 
+	                       
 	                       // File uploadedFile = new File(path + "/" + fileName);
 	                        //System.out.println(file.getAbsolutePath());
 	                        item.write(file);
+	                       
 	                      
 	                      // IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
 	                       
