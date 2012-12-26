@@ -169,7 +169,7 @@ $(function()
     <div class="control-group">
     <label class="control-label" for="inputEmail">Name</label>
     <div class="controls">
-    <input type="text" id="inputname" name="username" required="required" placeholder="Name" maxlength="20"/>
+    <input type="text" id="inputname" name="username" required="required" placeholder="Name" minlength="4" maxlength="20"/>
     </div>
     </div>
     <div class="control-group">
